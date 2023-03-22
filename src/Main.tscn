@@ -1,21 +1,32 @@
-[gd_scene load_steps=4 format=3 uid="uid://pvnkl2ophuc6"]
+[gd_scene load_steps=5 format=3 uid="uid://b7n3hli5t2f1p"]
 
-[ext_resource type="Script" path="res://src/tree/tree.gd" id="1_xsuk5"]
-[ext_resource type="Texture2D" uid="uid://d0ip05whua6kq" path="res://icon.svg" id="2_21n0y"]
-[ext_resource type="Script" path="res://src/player/player.gd" id="3_d8jpg"]
+[ext_resource type="Script" path="res://Src/Tree/Tree.gd" id="1_ehffe"]
+[ext_resource type="PackedScene" uid="uid://cshpelm6okiad" path="res://Src/Tree/TreeTuck.tscn" id="2_pa2co"]
+[ext_resource type="Script" path="res://Src/Player/Player.gd" id="3_jqo2d"]
+[ext_resource type="Texture2D" uid="uid://d0ip05whua6kq" path="res://icon.svg" id="4_iqxdf"]
 
-[node name="main" type="Node2D"]
+[node name="Main" type="Node2D"]
 
-[node name="tree" type="Node2D" parent="."]
-script = ExtResource("1_xsuk5")
+[node name="Tree" type="Node2D" parent="." node_paths=PackedStringArray("TreeSpawn")]
+script = ExtResource("1_ehffe")
+TreeSpawn = NodePath("")
 
-[node name="tree-tuck" type="Sprite2D" parent="tree"]
-position = Vector2(596, 586)
-texture = ExtResource("2_21n0y")
+[node name="TreeTuck" parent="Tree" instance=ExtResource("2_pa2co")]
 
-[node name="tree-tuck2" type="Sprite2D" parent="tree"]
-position = Vector2(596, 456)
-texture = ExtResource("2_21n0y")
+[node name="TreePosition" type="Marker2D" parent="Tree"]
+position = Vector2(541, 220)
 
-[node name="player" type="Node2D" parent="."]
-script = ExtResource("3_d8jpg")
+[node name="Player" type="Node2D" parent="."]
+script = ExtResource("3_jqo2d")
+
+[node name="TempPlayer" type="Sprite2D" parent="Player"]
+position = Vector2(432, 576)
+texture = ExtResource("4_iqxdf")
+
+[node name="TempAxe" type="Sprite2D" parent="Player/TempPlayer"]
+position = Vector2(-68, 0)
+texture = ExtResource("4_iqxdf")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
+
+[connection signal="hit" from="Player" to="Tree" method="_on_player_hit"]
