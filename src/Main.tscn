@@ -13,5 +13,9 @@ script = ExtResource("1_xsuk5")
 position = Vector2(596, 586)
 texture = ExtResource("2_21n0y")
 
+[node name="tree-tuck2" type="Sprite2D" parent="tree"]
+position = Vector2(596, 456)
+texture = ExtResource("2_21n0y")
+
 [node name="player" type="Node2D" parent="."]
 script = ExtResource("3_d8jpg")
