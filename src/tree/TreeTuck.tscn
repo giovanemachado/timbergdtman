@@ -150,10 +150,12 @@ _data = {
 "wrong-hit": SubResource("Animation_k1w2a")
 }
 
-[node name="TreeTuck" type="Sprite2D"]
+[node name="TreeTuck" type="Node2D"]
+
+[node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("1_0sjvc")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
 libraries = {
 "": SubResource("AnimationLibrary_ewc1w")
 }

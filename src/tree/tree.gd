@@ -3,11 +3,14 @@ extends Node2D
 @export var TreeTuck: PackedScene
 @export var TreeSpawn: Node2D
 
+@export var CurrentTucks : Array[Node]
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-#	var treeTuck = TreeTuck.instantiate()
-#	add_child(treeTuck)
-#	treeTuck.position = $TreePosition.position
+	var treeTuck = TreeTuck.instantiate()
+	add_child(treeTuck)
+	treeTuck.position = $TreePosition.position
+	CurrentTucks.append(treeTuck)
 	pass
 
 
@@ -17,5 +20,7 @@ func _process(delta):
 
 
 func _on_player_hit(cuttingAt):
-	print("cutting at ", cuttingAt)
-	
+	var treeTuck = TreeTuck.instantiate()
+	add_child(treeTuck)
+	treeTuck.position = $TreePosition.position
+	CurrentTucks.append(treeTuck)

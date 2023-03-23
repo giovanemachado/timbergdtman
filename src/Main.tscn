@@ -6,21 +6,43 @@
 [ext_resource type="Texture2D" uid="uid://d0ip05whua6kq" path="res://icon.svg" id="4_iqxdf"]
 
 [node name="Main" type="Node2D"]
+metadata/_edit_vertical_guides_ = [561.0]
 
 [node name="Tree" type="Node2D" parent="." node_paths=PackedStringArray("TreeSpawn")]
 script = ExtResource("1_ehffe")
-TreeSpawn = NodePath("")
-
-[node name="TreeTuck" parent="Tree" instance=ExtResource("2_pa2co")]
+TreeTuck = ExtResource("2_pa2co")
+TreeSpawn = NodePath("TreePosition")
+CurrentTucks = Array[Node]([null])
 
 [node name="TreePosition" type="Marker2D" parent="Tree"]
-position = Vector2(541, 220)
+position = Vector2(557, -175)
+
+[node name="TreeTuck" parent="Tree" instance=ExtResource("2_pa2co")]
+position = Vector2(558, 584)
+
+[node name="TreeTuck2" parent="Tree" instance=ExtResource("2_pa2co")]
+position = Vector2(558, 456)
+
+[node name="TreeTuck3" parent="Tree" instance=ExtResource("2_pa2co")]
+position = Vector2(557, 328)
+
+[node name="TreeTuck4" parent="Tree" instance=ExtResource("2_pa2co")]
+position = Vector2(557, 203)
+
+[node name="TreeTuck5" parent="Tree" instance=ExtResource("2_pa2co")]
+position = Vector2(557, 77)
+
+[node name="TreeTuck6" parent="Tree" instance=ExtResource("2_pa2co")]
+position = Vector2(557, -48)
+
+[node name="TreeTuck7" parent="Tree" instance=ExtResource("2_pa2co")]
+position = Vector2(557, -174)
 
 [node name="Player" type="Node2D" parent="."]
 script = ExtResource("3_jqo2d")
 
 [node name="TempPlayer" type="Sprite2D" parent="Player"]
-position = Vector2(432, 576)
+position = Vector2(399, 577)
 texture = ExtResource("4_iqxdf")
 
 [node name="TempAxe" type="Sprite2D" parent="Player/TempPlayer"]
