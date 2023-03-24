@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://cshpelm6okiad"]
+[gd_scene load_steps=8 format=3 uid="uid://cshpelm6okiad"]
 
 [ext_resource type="Texture2D" uid="uid://d0ip05whua6kq" path="res://icon.svg" id="1_0sjvc"]
+[ext_resource type="Script" path="res://Src/Tree/TreeTuck.gd" id="1_prls0"]
 
 [sub_resource type="Animation" id="Animation_tdhg7"]
 length = 0.001
@@ -44,7 +45,6 @@ tracks/2/keys = {
 [sub_resource type="Animation" id="Animation_rq4bt"]
 resource_name = "correct-hit"
 length = 0.6
-loop_mode = 1
 step = 0.0
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -86,7 +86,6 @@ tracks/2/keys = {
 [sub_resource type="Animation" id="Animation_h6m2x"]
 resource_name = "move-below"
 length = 0.2
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -103,7 +102,6 @@ tracks/0/keys = {
 [sub_resource type="Animation" id="Animation_k1w2a"]
 resource_name = "wrong-hit"
 length = 0.35
-loop_mode = 1
 step = 0.0
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -151,6 +149,7 @@ _data = {
 }
 
 [node name="TreeTuck" type="Node2D"]
+script = ExtResource("1_prls0")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("1_0sjvc")
@@ -159,3 +158,5 @@ texture = ExtResource("1_0sjvc")
 libraries = {
 "": SubResource("AnimationLibrary_ewc1w")
 }
+
+[connection signal="animation_finished" from="Sprite/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
