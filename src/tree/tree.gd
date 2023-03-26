@@ -32,6 +32,7 @@ func _on_player_hit(side):
 		return
 		
 	update_all_tucks()
+	SignalBus.tree_hit.emit()
 
 func _on_game_over():
 	print("yeh")

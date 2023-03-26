@@ -9,7 +9,7 @@ prototype - timber-man godot clone (but ugly)
   - [x] basic animation for tucks
   - [ ] sprite animation (for timberman movement)
   - [ ] sprite flip (timberboy needs to hit from the other side)
-  - [ ] sprite movement (timberbadboy literally need to go from on side to the other)
+  - [x] sprite movement (timberbadboy literally need to go from on side to the other)
 - [ ] add animation based movement
 - [ ] draw character + anything to animation
 - [ ] draw tuck

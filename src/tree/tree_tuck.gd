@@ -32,6 +32,10 @@ func _physics_process(delta):
 
 func hit():
 	z_index = 1
+	
+	if branch != null:
+		branch.queue_free()
+		
 	anim.play(Globals.TREE_TUCK_ANIMATIONS_NAMES.HIT)
 	
 func move_to(final_position):
