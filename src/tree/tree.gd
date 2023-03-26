@@ -12,12 +12,9 @@ var can_hit: bool = true
 
 const HIT_COOLDOWN = 0.2
 
-## Called when the node enters the scene tree for the first time.
-#func _ready():
-#	SignalBus._on_tree_tuck_animation_finished.connect(self._on_tree_tuck_animation_finished)
-
 func _ready():
 	timer.wait_time = HIT_COOLDOWN
+	SignalBus.game_over.connect(_on_game_over)
 
 func _on_player_hit(side):
 	if !can_hit:
@@ -26,18 +23,24 @@ func _on_player_hit(side):
 	can_hit = false
 	
 	timer.start()
-	print("timestart")
 	
 	tucks[0].hit()
-	tucks[0].queue_free()
 	tucks.remove_at(0)
 	
 	if check_branch_side(tucks[0], side):
-		print("Game Over")
+		SignalBus.emit_signal("game_over")
 		return
 		
 	update_all_tucks()
 
+func _on_game_over():
+	print("yeh")
+	timer.stop()
+	can_hit = false
+
+func _on_timer_timeout():
+	can_hit = true
+	
 func update_all_tucks():
 	var i = 0
 	for tuck in tucks:
@@ -52,21 +55,9 @@ func update_all_tucks():
 	var new_tree_tuck = tree_tuck.instantiate()
 	add_child(new_tree_tuck)
 	new_tree_tuck.position = tree_spawn
+	new_tree_tuck.update_branch_side(Globals.BranchSide.values()[randi() % Globals.BranchSide.size()])
 	tucks.append(new_tree_tuck)
 
 func check_branch_side(tuck, side):
 	var branch_side = tuck.get("branch_side")
 	return branch_side == side
-
-func _on_tree_tuck_animation_finished(anim_name):
-	if anim_name != Globals.TREE_TUCK_ANIMATIONS_NAMES.HIT:
-		return
-	
-	can_hit = true
-	tucks[0].queue_free()
-	tucks.remove_at(0)
-
-
-func _on_timer_timeout():
-	can_hit = true
-	print("timeout")

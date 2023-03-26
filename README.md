@@ -15,8 +15,8 @@ prototype - timber-man godot clone (but ugly)
 - [ ] draw tuck
 - [ ] draw branch (invert based on side, at future)
 - [ ] add sprites
-- [ ] hit tuck
-- [ ] spawn tucks, with random branchstuck
+- [x] hit tuck
+- [x] spawn tucks, with random branchstuck
 - [ ] game start (by first hit)
 - [ ] game over if touch branch
 - [ ] add timer bar + animation
