@@ -1,7 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://cshpelm6okiad"]
+[gd_scene load_steps=8 format=3 uid="uid://dg7cfeaaojmya"]
 
-[ext_resource type="Texture2D" uid="uid://d0ip05whua6kq" path="res://icon.svg" id="1_0sjvc"]
-[ext_resource type="Script" path="res://Src/Tree/TreeTuck.gd" id="1_prls0"]
+[ext_resource type="Script" path="res://src/tree/tree_tuck.gd" id="1_hrf2l"]
+[ext_resource type="Texture2D" uid="uid://d0ip05whua6kq" path="res://icon.svg" id="2_r1nb2"]
 
 [sub_resource type="Animation" id="Animation_tdhg7"]
 length = 0.001
@@ -149,10 +149,10 @@ _data = {
 }
 
 [node name="TreeTuck" type="Node2D"]
-script = ExtResource("1_prls0")
+script = ExtResource("1_hrf2l")
 
 [node name="Sprite" type="Sprite2D" parent="."]
-texture = ExtResource("1_0sjvc")
+texture = ExtResource("2_r1nb2")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
 libraries = {

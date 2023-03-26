@@ -1,21 +1,14 @@
 extends Node2D
 
-# Tree hits
-signal hit(cuttingAt)
+signal hit(side)
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_pressed("cut_right"):
-		hitTheTree(cutSide.CUT_RIGHT)
+		hit_tree(Globals.HitSide.RIGHT)
+
 	if Input.is_action_pressed("cut_left"):
-		hitTheTree(cutSide.CUT_LEFT)
+		hit_tree(Globals.HitSide.LEFT)
 
-# Possible sides to cut the tree down
-enum cutSide {CUT_RIGHT, CUT_LEFT}
 
-func hitTheTree(cuttingAt):
-	hit.emit(cuttingAt)
+func hit_tree(side):
+	hit.emit(side)

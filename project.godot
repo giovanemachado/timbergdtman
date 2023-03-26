@@ -11,13 +11,14 @@ config_version=5
 [application]
 
 config/name="P"
-run/main_scene="res://Src/Main.tscn"
+run/main_scene="res://src/Main.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-SignalBus="*res://SignalBus.gd"
+SignalBus="*res://src/signal_bus.gd"
+Globals="*res://src/globals.gd"
 
 [input]
 

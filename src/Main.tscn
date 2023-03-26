@@ -1,55 +1,61 @@
-[gd_scene load_steps=5 format=3 uid="uid://b7n3hli5t2f1p"]
+[gd_scene load_steps=5 format=3 uid="uid://bh45mhydyuxn7"]
 
-[ext_resource type="Script" path="res://Src/Tree/Tree.gd" id="1_ehffe"]
-[ext_resource type="PackedScene" uid="uid://cshpelm6okiad" path="res://Src/Tree/TreeTuck.tscn" id="2_pa2co"]
-[ext_resource type="Script" path="res://Src/Player/Player.gd" id="3_jqo2d"]
-[ext_resource type="Texture2D" uid="uid://d0ip05whua6kq" path="res://icon.svg" id="4_iqxdf"]
+[ext_resource type="Script" path="res://src/tree/tree.gd" id="1_cqndx"]
+[ext_resource type="PackedScene" uid="uid://dg7cfeaaojmya" path="res://src/tree/TreeTuck.tscn" id="2_6myp2"]
+[ext_resource type="Script" path="res://src/player/player.gd" id="3_n0jcn"]
+[ext_resource type="Texture2D" uid="uid://d0ip05whua6kq" path="res://icon.svg" id="4_p54rr"]
 
 [node name="Main" type="Node2D"]
 metadata/_edit_vertical_guides_ = [561.0]
 
-[node name="Tree" type="Node2D" parent="." node_paths=PackedStringArray("TreeSpawn")]
+[node name="Tree" type="Node2D" parent="."]
 position = Vector2(0, -2)
-script = ExtResource("1_ehffe")
-TreeTuck = ExtResource("2_pa2co")
-TreeSpawn = NodePath("TreePosition")
-CurrentTucksNps = Array[NodePath]([NodePath("TreeTuck"), NodePath("TreeTuck2"), NodePath("TreeTuck3"), NodePath("TreeTuck4"), NodePath("TreeTuck5"), NodePath("TreeTuck6"), NodePath("TreeTuck7")])
+script = ExtResource("1_cqndx")
+tree_tuck = ExtResource("2_6myp2")
+tucks_support = Array[NodePath]([NodePath("TreeTuck"), NodePath("TreeTuck2"), NodePath("TreeTuck3"), NodePath("TreeTuck4"), NodePath("TreeTuck5"), NodePath("TreeTuck6"), NodePath("TreeTuck7")])
 
 [node name="TreePosition" type="Marker2D" parent="Tree"]
 position = Vector2(557, -175)
 
-[node name="TreeTuck" parent="Tree" instance=ExtResource("2_pa2co")]
+[node name="TreePositionFinal" type="Marker2D" parent="Tree"]
+position = Vector2(560, 579)
+
+[node name="TreeTuck" parent="Tree" instance=ExtResource("2_6myp2")]
 position = Vector2(558, 584)
 
-[node name="TreeTuck2" parent="Tree" instance=ExtResource("2_pa2co")]
+[node name="TreeTuck2" parent="Tree" instance=ExtResource("2_6myp2")]
 position = Vector2(558, 456)
 
-[node name="TreeTuck3" parent="Tree" instance=ExtResource("2_pa2co")]
+[node name="TreeTuck3" parent="Tree" instance=ExtResource("2_6myp2")]
 position = Vector2(557, 328)
 
-[node name="TreeTuck4" parent="Tree" instance=ExtResource("2_pa2co")]
+[node name="TreeTuck4" parent="Tree" instance=ExtResource("2_6myp2")]
 position = Vector2(557, 203)
 
-[node name="TreeTuck5" parent="Tree" instance=ExtResource("2_pa2co")]
+[node name="TreeTuck5" parent="Tree" instance=ExtResource("2_6myp2")]
 position = Vector2(557, 77)
 
-[node name="TreeTuck6" parent="Tree" instance=ExtResource("2_pa2co")]
+[node name="TreeTuck6" parent="Tree" instance=ExtResource("2_6myp2")]
 position = Vector2(557, -48)
 
-[node name="TreeTuck7" parent="Tree" instance=ExtResource("2_pa2co")]
+[node name="TreeTuck7" parent="Tree" instance=ExtResource("2_6myp2")]
 position = Vector2(557, -174)
 
+[node name="Timer" type="Timer" parent="Tree"]
+one_shot = true
+
 [node name="Player" type="Node2D" parent="."]
-script = ExtResource("3_jqo2d")
+script = ExtResource("3_n0jcn")
 
 [node name="TempPlayer" type="Sprite2D" parent="Player"]
 position = Vector2(399, 577)
-texture = ExtResource("4_iqxdf")
+texture = ExtResource("4_p54rr")
 
 [node name="TempAxe" type="Sprite2D" parent="Player/TempPlayer"]
 position = Vector2(-68, 0)
-texture = ExtResource("4_iqxdf")
+texture = ExtResource("4_p54rr")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
 
+[connection signal="timeout" from="Tree/Timer" to="Tree" method="_on_timer_timeout"]
 [connection signal="hit" from="Player" to="Tree" method="_on_player_hit"]

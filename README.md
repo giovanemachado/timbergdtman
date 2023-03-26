@@ -22,5 +22,3 @@ prototype - timber-man godot clone (but ugly)
 - [ ] add timer bar + animation
 - [ ] add timer mechanic (timing decrease faster if not hitting)
 - [ ] game over if timer is over
-
-godot has a issue with arrays, see here to keep moving with our array of tucks https://github.com/godotengine/godot/issues/62916

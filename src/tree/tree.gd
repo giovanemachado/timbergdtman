@@ -1,58 +1,72 @@
 extends Node2D
 
+@export var tree_tuck: PackedScene
 
-@export var TreeTuck: PackedScene
-@export var TreeSpawn: Node2D
+@export var tucks_support: Array[NodePath]
+@onready var tucks = tucks_support.map(get_node) 
 
-@export var CurrentTucksNps: Array[NodePath]
-@onready var CurrentTucks = CurrentTucksNps.map(get_node) 
+var can_hit: bool = true
+@onready var tree_spawn = $TreePosition.position
+@onready var final_position = $TreePositionFinal.position 
+@onready var timer = $Timer
 
-var canHit: bool = true
+const HIT_COOLDOWN = 0.2
 
-# Called when the node enters the scene tree for the first time.
+## Called when the node enters the scene tree for the first time.
+#func _ready():
+#	SignalBus._on_tree_tuck_animation_finished.connect(self._on_tree_tuck_animation_finished)
+
 func _ready():
-	SignalBus._on_tree_tuck_animation_finished.connect(self._on_tree_tuck_animation_finished)
+	timer.wait_time = HIT_COOLDOWN
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
-func _on_player_hit(cuttingAt):
-	if !canHit:
+func _on_player_hit(side):
+	if !can_hit:
 		return
 		
-	canHit = false
+	can_hit = false
 	
-	var hittedTuck = CurrentTucks[1]
-	var branchSide = hittedTuck.get("BranchSide")
+	timer.start()
+	print("timestart")
 	
-	if branchSide == cuttingAt:
-		print("bad")
+	tucks[0].hit()
+	tucks[0].queue_free()
+	tucks.remove_at(0)
+	
+	if check_branch_side(tucks[0], side):
+		print("Game Over")
 		return
-	
-	print("good")
-	
+		
+	update_all_tucks()
+
+func update_all_tucks():
 	var i = 0
-	for tuck in CurrentTucks:
+	for tuck in tucks:
 		if i == 0:
-			tuck.Hitted()
+			tuck.move_to(final_position)
 			i += 1
 			continue
-		
-		tuck.MoveDown()
+			
+		tuck.move_to(tucks[i-1].position)
 		i += 1
 	
-	var newTreeTuck = TreeTuck.instantiate()
-	add_child(newTreeTuck)
-	newTreeTuck.position = $TreePosition.position
-	CurrentTucks.append(newTreeTuck)
+	var new_tree_tuck = tree_tuck.instantiate()
+	add_child(new_tree_tuck)
+	new_tree_tuck.position = tree_spawn
+	tucks.append(new_tree_tuck)
 
+func check_branch_side(tuck, side):
+	var branch_side = tuck.get("branch_side")
+	return branch_side == side
 
 func _on_tree_tuck_animation_finished(anim_name):
-	if anim_name == 'correct-hit':
-		canHit = true
-		CurrentTucks[0].queue_free()
-		CurrentTucks.remove_at(0)
-		
-		for tuck in CurrentTucks:
-			print(tuck.name)
+	if anim_name != Globals.TREE_TUCK_ANIMATIONS_NAMES.HIT:
+		return
+	
+	can_hit = true
+	tucks[0].queue_free()
+	tucks.remove_at(0)
+
+
+func _on_timer_timeout():
+	can_hit = true
+	print("timeout")
