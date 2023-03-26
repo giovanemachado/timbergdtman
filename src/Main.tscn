@@ -52,5 +52,4 @@ texture = ExtResource("4_iqxdf")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
 
-[connection signal="_on_animation_player_animation_finished_tree_tuck" from="Tree/TreeTuck" to="Tree" method="_on_tree_tuck__on_animation_player_animation_finished_tree_tuck"]
 [connection signal="hit" from="Player" to="Tree" method="_on_player_hit"]

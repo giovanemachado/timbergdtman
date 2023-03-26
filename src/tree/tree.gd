@@ -11,7 +11,7 @@ var canHit: bool = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	SignalBus._on_tree_tuck_animation_finished.connect(self._on_tree_tuck_animation_finished)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -42,17 +42,17 @@ func _on_player_hit(cuttingAt):
 		tuck.MoveDown()
 		i += 1
 	
-	CurrentTucks.remove_at(0)
-	
-	for tuck in CurrentTucks:
-		print(tuck.name)
-	
 	var newTreeTuck = TreeTuck.instantiate()
 	add_child(newTreeTuck)
 	newTreeTuck.position = $TreePosition.position
 	CurrentTucks.append(newTreeTuck)
 
 
-func _on_tree_tuck__on_animation_player_animation_finished_tree_tuck(anim_name):
-	print("can hit again") # code dies here
-	canHit = true
+func _on_tree_tuck_animation_finished(anim_name):
+	if anim_name == 'correct-hit':
+		canHit = true
+		CurrentTucks[0].queue_free()
+		CurrentTucks.remove_at(0)
+		
+		for tuck in CurrentTucks:
+			print(tuck.name)
