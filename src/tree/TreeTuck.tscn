@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://dg7cfeaaojmya"]
+[gd_scene load_steps=9 format=3 uid="uid://dg7cfeaaojmya"]
 
 [ext_resource type="Script" path="res://src/tree/tree_tuck.gd" id="1_hrf2l"]
-[ext_resource type="Texture2D" uid="uid://d0ip05whua6kq" path="res://icon.svg" id="2_r1nb2"]
+[ext_resource type="Texture2D" uid="uid://b0o7b0c3g1h3j" path="res://src/tree/tuck.png" id="2_m5140"]
+[ext_resource type="Texture2D" uid="uid://kvnucnolan1k" path="res://src/tree/branch.png" id="3_puh5r"]
 
 [sub_resource type="Animation" id="Animation_tdhg7"]
 length = 0.001
@@ -152,20 +153,24 @@ _data = {
 script = ExtResource("1_hrf2l")
 
 [node name="Sprite" type="Sprite2D" parent="."]
-texture = ExtResource("2_r1nb2")
+z_index = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
 libraries = {
 "": SubResource("AnimationLibrary_ewc1w")
 }
 
+[node name="Art" type="Sprite2D" parent="Sprite"]
+scale = Vector2(0.714112, 0.714112)
+texture = ExtResource("2_m5140")
+
 [node name="Branch" type="Sprite2D" parent="."]
-texture = ExtResource("2_r1nb2")
+texture = ExtResource("3_puh5r")
 
 [node name="RightBranchPosition" type="Marker2D" parent="."]
-position = Vector2(145, 1)
+position = Vector2(138, 1)
 
 [node name="LeftBranchPosition" type="Marker2D" parent="."]
-position = Vector2(-140, 0)
+position = Vector2(-130, 0)
 
 [connection signal="animation_finished" from="Sprite/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

@@ -58,4 +58,5 @@ func update_branch_side(new_branch_side):
 		branch.position = right_branch_position
 		
 	if branch_side == Globals.BranchSide.LEFT:
+		branch.set_flip_h(true);
 		branch.position = left_branch_position

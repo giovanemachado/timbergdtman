@@ -35,7 +35,6 @@ func _on_player_hit(side):
 	SignalBus.tree_hit.emit()
 
 func _on_game_over():
-	print("yeh")
 	timer.stop()
 	can_hit = false
 
