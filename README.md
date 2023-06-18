@@ -1,7 +1,7 @@
 # timbergdtman
 prototype - timber-man godot clone (but ugly)
 
-![tgdtm](https://github.com/giovanemachado/timbergdtman/assets/33123137/c5ea009d-4890-45c5-b48d-8b210220e9a7)
+![tgdtm](https://github.com/giovanemachado/timbergdtman/assets/33123137/a500168e-622a-4bcb-a28b-6b2162971296)
 
 ### todo
 - [x] initial setup
